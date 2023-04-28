@@ -117,26 +117,26 @@ def extract_bindings(cpython_path, version, configure=False):
         bindgen  bindgen_input.h -o bindgen_output.rs \
             --with-derive-default \
             --no-layout-tests --no-doc-comments \
-            --whitelist-type PyInterpreterState \
-            --whitelist-type PyFrameObject \
-            --whitelist-type PyThreadState \
-            --whitelist-type PyCodeObject \
-            --whitelist-type PyVarObject \
-            --whitelist-type PyBytesObject \
-            --whitelist-type PyASCIIObject \
-            --whitelist-type PyUnicodeObject \
-            --whitelist-type PyCompactUnicodeObject \
-            --whitelist-type PyTupleObject \
-            --whitelist-type PyListObject \
-            --whitelist-type PyLongObject \
-            --whitelist-type PyFloatObject \
-            --whitelist-type PyDictObject \
-            --whitelist-type PyDictKeysObject \
-            --whitelist-type PyDictKeyEntry \
-            --whitelist-type PyDictUnicodeEntry \
-            --whitelist-type PyObject \
-            --whitelist-type PyTypeObject \
-            --whitelist-type PyHeapTypeObject \
+            --allowlist-type PyInterpreterState \
+            --allowlist-type PyFrameObject \
+            --allowlist-type PyThreadState \
+            --allowlist-type PyCodeObject \
+            --allowlist-type PyVarObject \
+            --allowlist-type PyBytesObject \
+            --allowlist-type PyASCIIObject \
+            --allowlist-type PyUnicodeObject \
+            --allowlist-type PyCompactUnicodeObject \
+            --allowlist-type PyTupleObject \
+            --allowlist-type PyListObject \
+            --allowlist-type PyLongObject \
+            --allowlist-type PyFloatObject \
+            --allowlist-type PyDictObject \
+            --allowlist-type PyDictKeysObject \
+            --allowlist-type PyDictKeyEntry \
+            --allowlist-type PyDictUnicodeEntry \
+            --allowlist-type PyObject \
+            --allowlist-type PyTypeObject \
+            --allowlist-type PyHeapTypeObject \
              -- -I . -I ./Include -I ./Include/internal
     """)
     if ret:

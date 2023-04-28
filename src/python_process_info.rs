@@ -11,7 +11,7 @@ use std::slice;
 use anyhow::{Context, Error, Result};
 use lazy_static::lazy_static;
 use proc_maps::{get_process_maps, MapRange};
-use remoteprocess::{Pid, ProcessMemory};
+use remoteprocess::ProcessMemory;
 
 use crate::binary_parser::{parse_binary, BinaryInfo};
 use crate::config::Config;

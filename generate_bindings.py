@@ -190,7 +190,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     if args.all:
-        versions = ['v3.8.0b4', 'v3.7.0', 'v3.6.6', 'v3.5.5', 'v3.4.8', 'v3.3.7', 'v3.2.6', 'v2.7.15']
+        versions = ["2.7.18", "3.5.10", "3.6.15", "3.7.15", "3.8.15", "3.9.15", "3.10.9", "3.11.0"]
     else:
         versions = args.versions
         if not versions:

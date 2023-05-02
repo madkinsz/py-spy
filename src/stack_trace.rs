@@ -286,7 +286,7 @@ impl ProcessInfo {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::python_bindings::v3_7_0::PyCodeObject;
+    use crate::python_bindings::v3_7_15::PyCodeObject;
     use crate::python_data_access::tests::to_byteobject;
     use remoteprocess::LocalProcess;
 

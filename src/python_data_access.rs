@@ -63,7 +63,7 @@ pub fn copy_long<P: ProcessMemory>(process: &P, addr: usize) -> Result<(i64, boo
     // this is PyLongObject for a specific version of python, but this works since it's binary compatible
     // layout across versions we're targeting
     let value =
-        process.copy_pointer(addr as *const crate::python_bindings::v3_7_0::PyLongObject)?;
+        process.copy_pointer(addr as *const crate::python_bindings::v3_7_15::PyLongObject)?;
     let negative: i64 = if value.ob_base.ob_size < 0 { -1 } else { 1 };
     let size = value.ob_base.ob_size * (negative as isize);
     match size {
@@ -172,7 +172,7 @@ impl<'a, P: ProcessMemory> DictIterator<'a, P> {
                 })
             }
             _ => {
-                let dict: crate::python_bindings::v3_7_0::PyDictObject =
+                let dict: crate::python_bindings::v3_7_15::PyDictObject =
                     process.copy_struct(addr)?;
                 // Getting this going generically is tricky: there is a lot of variation on how dictionaries are handled
                 // instead this just focuses on a single version, which works for python
@@ -216,11 +216,11 @@ impl<'a, P: ProcessMemory> Iterator for DictIterator<'a, P> {
             let entry = match self.kind {
                 0 => {
                     let addr = index
-                        * std::mem::size_of::<crate::python_bindings::v3_7_0::PyDictKeyEntry>()
+                        * std::mem::size_of::<crate::python_bindings::v3_7_15::PyDictKeyEntry>()
                         + self.entries_addr;
                     let ret = self
                         .process
-                        .copy_struct::<crate::python_bindings::v3_7_0::PyDictKeyEntry>(addr);
+                        .copy_struct::<crate::python_bindings::v3_7_15::PyDictKeyEntry>(addr);
                     ret.map(|entry| (entry.me_key as usize, entry.me_value as usize))
                 }
                 _ => {
@@ -245,7 +245,7 @@ impl<'a, P: ProcessMemory> Iterator for DictIterator<'a, P> {
                     let value = if self.values != 0 {
                         let valueaddr = self.values
                             + index
-                                * std::mem::size_of::<*mut crate::python_bindings::v3_7_0::PyObject>(
+                                * std::mem::size_of::<*mut crate::python_bindings::v3_7_15::PyObject>(
                                 );
                         match self.process.copy_struct(valueaddr) {
                             Ok(addr) => addr,
@@ -394,7 +394,7 @@ where
         format!("({})", values.join(", "))
     } else if value_type_name == "float" {
         let value =
-            process.copy_pointer(addr as *const crate::python_bindings::v3_7_0::PyFloatObject)?;
+            process.copy_pointer(addr as *const crate::python_bindings::v3_7_15::PyFloatObject)?;
         format!("{}", value.ob_fval)
     } else if value_type_name == "NoneType" {
         "None".to_owned()
@@ -410,7 +410,7 @@ pub mod tests {
     // the idea here is to create various cpython interpretator structs locally
     // and then test out that the above code handles appropriately
     use super::*;
-    use crate::python_bindings::v3_7_0::{
+    use crate::python_bindings::v3_7_15::{
         PyASCIIObject, PyBytesObject, PyUnicodeObject, PyVarObject,
     };
     use remoteprocess::LocalProcess;
@@ -478,7 +478,7 @@ pub mod tests {
     #[test]
     fn test_copy_string() {
         let original = "function_name";
-        let obj = to_asciiobject(original);
+        let obj: AllocatedPyASCIIObject = to_asciiobject(original);
 
         let unicode: &PyUnicodeObject = unsafe { std::mem::transmute(&obj.base) };
         let copied = copy_string(unicode, &LocalProcess).unwrap();

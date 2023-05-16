@@ -1,11 +1,17 @@
 pub mod v2_7_15;
+pub mod v2_7_18;
 pub mod v3_10_0;
+pub mod v3_10_9;
 pub mod v3_11_0;
 pub mod v3_3_7;
 pub mod v3_5_5;
+pub mod v3_6_15;
 pub mod v3_6_6;
 pub mod v3_7_0;
+pub mod v3_7_15;
 pub mod v3_8_0;
+pub mod v3_8_15;
+pub mod v3_9_15;
 pub mod v3_9_5;
 
 // currently the PyRuntime struct used from Python 3.7 on really can't be

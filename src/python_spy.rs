@@ -1,5 +1,4 @@
 #[cfg(windows)]
-use regex::RegexBuilder;
 use std;
 use std::collections::HashMap;
 #[cfg(all(target_os = "linux", unwind))]
@@ -15,7 +14,7 @@ use crate::config::{Config, LockingStrategy};
 #[cfg(unwind)]
 use crate::native_stack_trace::NativeStack;
 use crate::python_bindings::{
-    v2_7_15, v3_10_0, v3_11_0, v3_3_7, v3_5_5, v3_6_6, v3_7_0, v3_8_0, v3_9_5,
+    v2_7_15, v3_10_9, v3_11_0, v3_3_7, v3_5_5, v3_6_15, v3_7_15, v3_8_15, v3_9_15,
 };
 use crate::python_data_access::format_variable;
 use crate::python_interpreters::{InterpreterState, ThreadState};
@@ -149,10 +148,10 @@ impl PythonSpy {
             } => self._get_stack_traces::<v3_5_5::_is>(),
             Version {
                 major: 3, minor: 6, ..
-            } => self._get_stack_traces::<v3_6_6::_is>(),
+            } => self._get_stack_traces::<v3_6_15::_is>(),
             Version {
                 major: 3, minor: 7, ..
-            } => self._get_stack_traces::<v3_7_0::_is>(),
+            } => self._get_stack_traces::<v3_7_15::_is>(),
             // v3.8.0a1 to v3.8.0a3 is compatible with 3.7 ABI, but later versions of 3.8.0 aren't
             Version {
                 major: 3,
@@ -160,20 +159,20 @@ impl PythonSpy {
                 patch: 0,
                 ..
             } => match self.version.release_flags.as_ref() {
-                "a1" | "a2" | "a3" => self._get_stack_traces::<v3_7_0::_is>(),
-                _ => self._get_stack_traces::<v3_8_0::_is>(),
+                "a1" | "a2" | "a3" => self._get_stack_traces::<v3_7_15::_is>(),
+                _ => self._get_stack_traces::<v3_8_15::_is>(),
             },
             Version {
                 major: 3, minor: 8, ..
-            } => self._get_stack_traces::<v3_8_0::_is>(),
+            } => self._get_stack_traces::<v3_8_15::_is>(),
             Version {
                 major: 3, minor: 9, ..
-            } => self._get_stack_traces::<v3_9_5::_is>(),
+            } => self._get_stack_traces::<v3_9_15::_is>(),
             Version {
                 major: 3,
                 minor: 10,
                 ..
-            } => self._get_stack_traces::<v3_10_0::_is>(),
+            } => self._get_stack_traces::<v3_10_9::_is>(),
             Version {
                 major: 3,
                 minor: 11,

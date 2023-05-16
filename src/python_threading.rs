@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use anyhow::Error;
 
-use crate::python_bindings::{v3_10_0, v3_11_0, v3_6_6, v3_7_0, v3_8_0, v3_9_5};
+use crate::python_bindings::{v3_10_9, v3_11_0, v3_6_15, v3_7_15, v3_8_15, v3_9_15};
 use crate::python_data_access::{copy_long, copy_string, DictIterator, PY_TPFLAGS_MANAGED_DICT};
 use crate::python_interpreters::{InterpreterState, Object, TypeObject};
 use crate::python_spy::PythonSpy;
@@ -93,21 +93,21 @@ pub fn thread_name_lookup(process: &PythonSpy) -> Option<HashMap<u64, String>> {
     let err = match process.version {
         Version {
             major: 3, minor: 6, ..
-        } => _thread_name_lookup::<v3_6_6::_is>(&process),
+        } => _thread_name_lookup::<v3_6_15::_is>(&process),
         Version {
             major: 3, minor: 7, ..
-        } => _thread_name_lookup::<v3_7_0::_is>(&process),
+        } => _thread_name_lookup::<v3_7_15::_is>(&process),
         Version {
             major: 3, minor: 8, ..
-        } => _thread_name_lookup::<v3_8_0::_is>(&process),
+        } => _thread_name_lookup::<v3_8_15::_is>(&process),
         Version {
             major: 3, minor: 9, ..
-        } => _thread_name_lookup::<v3_9_5::_is>(&process),
+        } => _thread_name_lookup::<v3_9_15::_is>(&process),
         Version {
             major: 3,
             minor: 10,
             ..
-        } => _thread_name_lookup::<v3_10_0::_is>(&process),
+        } => _thread_name_lookup::<v3_10_9::_is>(&process),
         Version {
             major: 3,
             minor: 11,

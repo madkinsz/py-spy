@@ -13,6 +13,9 @@ use lazy_static::lazy_static;
 use proc_maps::{get_process_maps, MapRange};
 use remoteprocess::ProcessMemory;
 
+#[cfg(not(target_os = "macos"))]
+use remoteprocess::Pid;
+
 use crate::binary_parser::{parse_binary, BinaryInfo};
 use crate::config::Config;
 use crate::python_bindings::{

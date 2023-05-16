@@ -294,15 +294,15 @@ impl PythonCoreDump {
             } => self._get_stack::<v3_7_15::_is>(config),
             Version {
                 major: 3, minor: 8, ..
-            } => self._get_stack::<v3_8_0::_is>(config),
+            } => self._get_stack::<v3_8_15::_is>(config),
             Version {
                 major: 3, minor: 9, ..
-            } => self._get_stack::<v3_9_5::_is>(config),
+            } => self._get_stack::<v3_9_15::_is>(config),
             Version {
                 major: 3,
                 minor: 10,
                 ..
-            } => self._get_stack::<v3_10_0::_is>(config),
+            } => self._get_stack::<v3_10_9::_is>(config),
             Version {
                 major: 3,
                 minor: 11,

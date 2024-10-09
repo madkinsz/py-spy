@@ -75,6 +75,7 @@ jobs:
         MACOSX_DEPLOYMENT_TARGET: 10.9
       run: |
         rustup target add aarch64-apple-darwin
+        rustup target add x86_64-apple-darwin
         pip install --upgrade maturin
         maturin build --release -o dist --target universal2-apple-darwin
       if: matrix.os == 'macos-latest'

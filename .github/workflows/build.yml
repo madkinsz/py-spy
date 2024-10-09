@@ -97,7 +97,7 @@ jobs:
       matrix:
         target: [i686-musl, armv7-musleabihf, aarch64-musl, x86_64-musl]
     container:
-      image: docker://benfred/rust-musl-cross:${{ matrix.target }}
+      image: ghcr.io/zanieb/rust-musl-cross-pyspy:${{ matrix.target }}
       env:
         RUSTUP_HOME: /root/.rustup
         CARGO_HOME: /root/.cargo

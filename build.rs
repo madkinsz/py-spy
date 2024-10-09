@@ -1,6 +1,8 @@
 use std::env;
 
 fn main() {
+    println!("cargo::rustc-check-cfg=cfg(unwind)");
+
     if env::var("CARGO_CFG_TARGET_ARCH").unwrap() != "x86_64" {
         return;
     }
